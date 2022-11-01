@@ -31,6 +31,7 @@ CREATE TABLE "author" (
 );
 
 CREATE TABLE "rel_cmt_cat" (
+  "id" SERIAL PRIMARY KEY,
   "comment" int,
   "user" int,
   "post" int
