@@ -17,12 +17,13 @@ CREATE TABLE "entradas" (
 
 CREATE TABLE "categorias" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar 
+  "name" varchar
 );
 
 CREATE TABLE "comentarios" (
   "id" SERIAL PRIMARY KEY,
-  "comment" varchar NOT NULL
+  "comment" varchar NOT NULL,
+  "user" int
 );
 
 CREATE TABLE "author" (
@@ -30,23 +31,21 @@ CREATE TABLE "author" (
   "name" varchar NOT NULL
 );
 
-CREATE TABLE "rel_cmt_cat" (
+CREATE TABLE "rel_comentario_entrada" (
   "id" SERIAL PRIMARY KEY,
   "comment" int,
-  "user" int,
   "post" int
 );
 
-ALTER TABLE "entradas" ADD FOREIGN KEY ("author") REFERENCES "author" ("id");
+ALTER TABLE "comentarios" ADD FOREIGN KEY ("user") REFERENCES "user" ("id");
+
+ALTER TABLE "rel_comentario_entrada" ADD FOREIGN KEY ("comment") REFERENCES "comentarios" ("id");
+
+ALTER TABLE "rel_comentario_entrada" ADD FOREIGN KEY ("post") REFERENCES "entradas" ("id");
 
 ALTER TABLE "entradas" ADD FOREIGN KEY ("categoria") REFERENCES "categorias" ("id");
 
-ALTER TABLE "rel_cmt_cat" ADD FOREIGN KEY ("post") REFERENCES "entradas" ("id");
-
-ALTER TABLE "rel_cmt_cat" ADD FOREIGN KEY ("user") REFERENCES "user" ("id");
-
-ALTER TABLE  "rel_cmt_cat" ADD FOREIGN KEY ("comment") REFERENCES "comentarios" ("id");
-
+ALTER TABLE "entradas" ADD FOREIGN KEY ("author") REFERENCES "author" ("id");
 
 INSERT into author (name) values ('carlos catalan'),('tommy thomson');
 INSERT into categorias  (name) values ('personal'),('corporativo');
@@ -54,5 +53,5 @@ INSERT into "user"  (name,email,"password",age) values ('Rodrigo Rodriguez','rod
 insert into entradas (title,description,author,"content",categoria) values ('viaje a Roma','en este blog hablare de mi experiencia en roma',2,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa',1),
 ('empresa','como administrar mejor',2,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa',2);
 
-insert into comentarios ("comment") values ('muy buenas anecdotas! espero poder ir algun dia'),('mmm.. puse en practica tus consejos y no fueron de ayuda');
-insert into rel_cmt_cat ("comment","user",post) values (1,1,1),(2,2,2);
+insert into comentarios ("comment","user") values ('muy buenas anecdotas! espero poder ir algun dia',1),('mmm.. puse en practica tus consejos y no fueron de ayuda',2);
+insert into rel_comentario_entrada ("comment",post) values (1,1),(2,2);

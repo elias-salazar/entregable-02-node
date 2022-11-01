@@ -13,7 +13,7 @@ CREATE TABLE "entradas" (
   "author" int,
   "content" varchar,
   "categoria" int
-); 
+);
 
 CREATE TABLE "categorias" (
   "id" SERIAL PRIMARY KEY,
@@ -22,7 +22,8 @@ CREATE TABLE "categorias" (
 
 CREATE TABLE "comentarios" (
   "id" SERIAL PRIMARY KEY,
-  "comment" varchar NOT NULL
+  "comment" varchar NOT NULL,
+  "user" int
 );
 
 CREATE TABLE "author" (
@@ -30,18 +31,18 @@ CREATE TABLE "author" (
   "name" varchar NOT NULL
 );
 
-CREATE TABLE "rel_cmt_cat" (
+CREATE TABLE "rel_comentario_entrada" (
+  "id" SERIAL PRIMARY KEY,
   "comment" int,
-  "user" int,
   "post" int
 );
 
-ALTER TABLE "entradas" ADD FOREIGN KEY ("author") REFERENCES "author" ("id");
+ALTER TABLE "comentarios" ADD FOREIGN KEY ("user") REFERENCES "user" ("id");
+
+ALTER TABLE "rel_comentario_entrada" ADD FOREIGN KEY ("comment") REFERENCES "comentarios" ("id");
+
+ALTER TABLE "rel_comentario_entrada" ADD FOREIGN KEY ("post") REFERENCES "entradas" ("id");
 
 ALTER TABLE "entradas" ADD FOREIGN KEY ("categoria") REFERENCES "categorias" ("id");
 
-ALTER TABLE "rel_cmt_cat" ADD FOREIGN KEY ("post") REFERENCES "entradas" ("id");
-
-ALTER TABLE "rel_cmt_cat" ADD FOREIGN KEY ("user") REFERENCES "user" ("id");
-
-ALTER TABLE "rel_cmt_cat" ADD FOREIGN KEY ("comment") REFERENCES "comentarios" ("id");
+ALTER TABLE "entradas" ADD FOREIGN KEY ("author") REFERENCES "author" ("id");
