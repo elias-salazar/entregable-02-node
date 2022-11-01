@@ -50,8 +50,8 @@ ALTER TABLE  "rel_cmt_cat" ADD FOREIGN KEY ("comment") REFERENCES "comentarios" 
 INSERT into author (name) values ('carlos catalan'),('tommy thomson');
 INSERT into categorias  (name) values ('personal'),('corporativo');
 INSERT into "user"  (name,email,"password",age) values ('Rodrigo Rodriguez','rodri@gmail.com','ro12dri34',16),('Roberto Ramirez','robert@gmail.com','ro21bert43',20);
-insert into entradas (title,description,author,"content",categoria) values ('viaje a Roma','en este blog hablare de mi experiencia en roma',2,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?',1),
-('empresa','como administrar mejor',2,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?',2);
+insert into entradas (title,description,author,"content",categoria) values ('viaje a Roma','en este blog hablare de mi experiencia en roma',2,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa',1),
+('empresa','como administrar mejor',2,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa',2);
 
 insert into comentarios ("comment") values ('muy buenas anecdotas! espero poder ir algun dia'),('mmm.. puse en practica tus consejos y no fueron de ayuda');
 insert into rel_cmt_cat ("comment","user",post) values (1,1,1),(2,2,2);
